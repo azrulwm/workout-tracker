@@ -1,5 +1,7 @@
 import { useWorkoutsContext } from "../hooks/useWorkoutsContext";
 import { useAuthContext } from "../hooks/useAuthContext";
+import WorkoutUpdate from "./WorkoutUpdate";
+import { useState } from "react";
 
 //date fns
 import formatDistanceToNow from "date-fns/formatDistanceToNow";
@@ -7,6 +9,8 @@ import formatDistanceToNow from "date-fns/formatDistanceToNow";
 const WorkoutDetails = ({ workout }) => {
   const { dispatch } = useWorkoutsContext();
   const { user } = useAuthContext();
+
+  const [displayEdit, setDisplayEdit] = useState(false);
 
   const handleClick = async () => {
     if (!user) {
@@ -26,6 +30,10 @@ const WorkoutDetails = ({ workout }) => {
     }
   };
 
+  const handleEdit = () => {
+    return !displayEdit ? setDisplayEdit(true) : setDisplayEdit(false);
+  };
+
   return (
     <div className="workout-details">
       <h4>{workout.title}</h4>
@@ -40,9 +48,14 @@ const WorkoutDetails = ({ workout }) => {
       <p>
         {formatDistanceToNow(new Date(workout.createdAt), { addSuffix: true })}
       </p>
+
       <span className="material-symbols-outlined" onClick={handleClick}>
         delete
       </span>
+      <span className="material-symbols-outlined" onClick={handleEdit}>
+        edit
+      </span>
+      {displayEdit && <WorkoutUpdate />}
     </div>
   );
 };
