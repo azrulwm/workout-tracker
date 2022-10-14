@@ -19,9 +19,11 @@ const WorkoutUpdate = ({ workout }) => {
       return;
     }
 
-    const response = await fetch("/api/workouts" + workout._id, {
+    const updatedWorkout = { title, load, reps };
+
+    const response = await fetch("/api/workouts/" + workout._id, {
       method: "PATCH",
-      body: JSON.stringify(workout),
+      body: JSON.stringify(updatedWorkout),
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${user.token}`,
@@ -29,6 +31,7 @@ const WorkoutUpdate = ({ workout }) => {
     });
 
     const json = await response.json();
+    console.log(json);
 
     if (!response.ok) {
       setError(json.error);
@@ -41,7 +44,8 @@ const WorkoutUpdate = ({ workout }) => {
       setError(null);
       //   setEmptyFields([]);
       console.log("workout updated");
-      dispatch({ type: "UPDATE_WORKOUT", payload: json });
+      // dispatch({ type: "UPDATE_WORKOUT", payload: json });
+      console.log(json);
     }
   };
 

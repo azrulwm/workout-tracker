@@ -55,7 +55,7 @@ const WorkoutDetails = ({ workout }) => {
       <span className="material-symbols-outlined" onClick={handleEdit}>
         edit
       </span>
-      {displayEdit && <WorkoutUpdate />}
+      {displayEdit && <WorkoutUpdate workout={workout} />}
     </div>
   );
 };
