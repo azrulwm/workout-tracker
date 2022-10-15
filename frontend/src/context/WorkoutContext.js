@@ -22,14 +22,7 @@ export const workoutsReducer = (state, action) => {
     case "UPDATE_WORKOUT":
       return {
         workouts: state.workouts.map((w) =>
-          w._id === action.payload._id
-            ? {
-                _id: action.payload._id,
-                title: action.payload.title,
-                load: action.payload.load,
-                reps: action.payload.reps,
-              }
-            : w
+          w._id === action.payload._id ? (w = action.payload) : w
         ),
       };
     default:

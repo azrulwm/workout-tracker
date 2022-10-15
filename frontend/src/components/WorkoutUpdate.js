@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { useWorkoutsContext } from "../hooks/useWorkoutsContext";
 
-const WorkoutUpdate = ({ workout }) => {
+const WorkoutUpdate = ({ workout, setDisplayEdit }) => {
   const { dispatch } = useWorkoutsContext();
   const { user } = useAuthContext();
 
@@ -31,7 +31,6 @@ const WorkoutUpdate = ({ workout }) => {
     });
 
     const json = await response.json();
-    console.log(json);
 
     if (!response.ok) {
       setError(json.error);
@@ -44,8 +43,8 @@ const WorkoutUpdate = ({ workout }) => {
       setError(null);
       //   setEmptyFields([]);
       console.log("workout updated");
-      // dispatch({ type: "UPDATE_WORKOUT", payload: json });
-      console.log(json);
+      dispatch({ type: "UPDATE_WORKOUT", payload: json });
+      setDisplayEdit(false);
     }
   };
 
