@@ -13,7 +13,7 @@ const Home = () => {
   useEffect(() => {
     const fetchWorkouts = async () => {
       const response = await fetch(
-        process.env.REACT_APP_BACKEND + `/api/workouts`,
+        `${process.env.REACT_APP_BACKEND}/api/workouts/`,
         {
           headers: {
             Authorization: `Bearer ${user.token}`,

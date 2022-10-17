@@ -18,7 +18,7 @@ const WorkoutDetails = ({ workout }) => {
     }
 
     const response = await fetch(
-      process.env.REACT_APP_BACKEND + "api/workouts/" + workout._id,
+      `${process.env.REACT_APP_BACKEND}/api/workouts/` + workout._id,
       {
         method: "DELETE",
         headers: {
