@@ -21,14 +21,17 @@ const WorkoutUpdate = ({ workout, setDisplayEdit }) => {
 
     const updatedWorkout = { title, load, reps };
 
-    const response = await fetch("/api/workouts/" + workout._id, {
-      method: "PATCH",
-      body: JSON.stringify(updatedWorkout),
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${user.token}`,
-      },
-    });
+    const response = await fetch(
+      process.env.REACT_APP_BACKEND + "/api/workouts/" + workout._id,
+      {
+        method: "PATCH",
+        body: JSON.stringify(updatedWorkout),
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user.token}`,
+        },
+      }
+    );
 
     const json = await response.json();
 
